@@ -1,0 +1,152 @@
+<html>
+    <style>
+      @font-face {
+  font-family: fashionFont;
+  src: "./AguafinaScript-Regular.ttf";
+    }
+    .font1{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color:purple;
+    }
+    .nav{
+    border:1px solid #ccc;
+    border-width:1px 0;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+    background-color: #6A5ACD;
+}
+.nav li{
+    display:inline;
+    padding:30px;
+}
+.nav a{
+    display:inline-block;
+    padding:10px;
+    font-size: 30px;
+    color:yellow;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+}
+.nav a:hover{
+    color:purple;
+}
+
+        [type=radio] { 
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio] + img {
+  cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked + img {
+  outline: 5px solid #f00;
+}
+.specialbutton {
+  text-decoration: none;
+  display: inline-block;
+  padding: 30px 120px;
+  background-color: #6A5ACD;
+  color: yellow;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: larger;
+}
+
+.specialbutton:hover {
+  background-color: lightyellow;
+  color: purple;
+}
+.round {
+  border-radius: 50%;
+}
+    </style>
+    <script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+    </script>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aguafina+Script&display=swap" rel="stylesheet">
+  <center>
+    <h1 style="font-size: 80px; font-family: 'Aguafina Script', cursive; color: purple;">Fashion Recommendation System</h1>
+    <!-- <marquee scrollamount="20"><h1 style="font-size: 80px; font-family: 'Aguafina Script', cursive;">Fashion Recommendation System</h1></marquee> -->
+  </center>
+</head>    
+<body>
+  <ul class="nav">
+    <li><a href="/">Home</a></li>
+    <li><a href="/userprofile">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+<center>
+    <h1 class="font1">Recommend Clothes From Wardrobe </h1>
+<h2 class="font1">Select one of the clothing items in your wardrobe.</h2>
+<a href='/fashion' class="specialbutton">Upload To Wardrobe</a> <a href='/select' class="specialbutton">Outfit Recommender</a> 
+<h1></h1>
+<h3 class="font1">Choose the occasion and hit Recommend</h3>
+<form action="\recommend" method="POST">
+<h2 class="font1">Shirts: </h2>
+{% for i in lshirts %}
+<label>
+<input type="radio" name="cloth" value="{{i}}">
+<img height=300 width=300 src="{{ url_for('download_file', filename=i) }}">
+</label>
+{% else %}
+    <h2>Please Upload Images of your Shirts to the wardrobe </h2>
+{% endfor %}
+<br><br><br><br>
+<h2 class="font1">T-Shirts: </h2>
+{% for i in ltshirts %}
+<label>
+  <input type="radio" name="cloth" value="{{i}}">
+  <img height=300 width=300 src="{{ url_for('download_file', filename=i) }}">
+  </label>
+  {% else %}
+    <h2>Please Upload Images of your T-Shirts to the wardrobe </h2>
+  {% endfor %}
+  <br><br><br><br>
+<h2 class="font1">Shoes: </h2>
+{% for i in lshoes %}
+<label>
+  <input type="radio" name="cloth" value="{{i}}">
+  <img height=300 width=300 src="{{ url_for('download_file', filename=i) }}">
+  </label>
+  {% else %}
+    <h2>Please Upload Images of your Shoes to the wardrobe </h2>
+  {% endfor %}
+  <br><br><br><br>
+<h2 class="font1">Pants: </h2>
+{% for i in lpants %}
+<label>
+  <input type="radio" name="cloth" value="{{i}}">
+  <img height=300 width=300 src="{{ url_for('download_file', filename=i) }}">
+  </label>
+  {% else %}
+    <h2>Please Upload Images of your Pants to the wardrobe </h2>
+  {% endfor %}
+  <br><br><br><br>
+<label for="occasion"> <h3 style="display:inline" class="font1">The Outfit is for: </h3></label>
+          <select name="occasion" id="occasion">
+            <option value="party">Party</option>
+            <option value="office">Office</option>
+            <option value="sports">Sports</option>
+            <!-- <option value="function">Function</option> -->
+          </select>
+<br><br><br><br>
+<center><input type="submit" value="Submit" class="specialbutton"></center>
+</form>
+<!---<img src="{{ url_for('download_file', filename='hello/pants/khaki/1.jpg') }}"> -->
+<!-- <img src="../users/hello/pants/khaki/1.jpg"> -->
+</body></center>  
+</html>

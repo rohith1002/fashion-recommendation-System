@@ -1,0 +1,50 @@
+{% extends "logintemplate.html" %}
+{% block navbar %}
+<ul class="nav">
+    <li><a href="/">Home</a></li>
+    <li><a href="/userprofile">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+{% endblock %}
+    <script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+    </script>
+<body>
+{% block content %}
+<center>
+    <h1 class="font1">Most suitable outfits are:</h1>
+<a href='/fashion' class="specialbutton">Upload To Wardrobe</a> <a href='/select' class="specialbutton">Outfit Recommender</a> 
+<h1></h1>
+<!-- <form action="\recommend" method="POST">
+    <input hidden type="text" id="type" name="type" placeholder="{{pred}}" value="{{pred}}"> 
+    <input hidden type="text" id="color" name="color" placeholder="{{pred2}}" value="{{pred2}}"> -->
+{% for i in img %}
+<center>
+<label>
+<img height=300 width=300 src="{{ url_for('download_file', filename=i) }}">
+</label>
+<br><br>
+</center>
+{% endfor %}
+<br><br><br><br>
+<!-- 
+<input type="Submit" value="Next"> -->
+{% if hiden == "hidden1" %}
+    <button  onclick="location.href= '/recommendprev';" class="specialbutton">Previous</button>
+{% elif hiden == "hidden2" %}
+    <button  onclick="location.href= '/recommendnext';" class="specialbutton">Next</button>
+{% else %}
+    <button  onclick="location.href= '/recommendnext';" class="specialbutton">Next</button>
+    <button  onclick="location.href= '/recommendprev';" class="specialbutton">Previous</button>
+</form>
+{% endif %}
+<!---<img src="{{ url_for('download_file', filename='hello/pants/khaki/1.jpg') }}"> -->
+<!-- <img src="../users/hello/pants/khaki/1.jpg"> -->
+</center>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,250 @@
+{% extends "logintemplate.html" %}
+{% block navbar %}
+<ul class="nav">
+    <li><a href="/">Home</a></li>
+    <li><a href="/userprofile">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+  </ul>
+{% endblock %}
+    <script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+};
+
+    </script>
+{% block content %}
+<center>
+    <h1 class="font1">Upload Clothes to Your Wardrobe </h1>
+<h2 class="font1">You are logged in as {{ current_user.uname }} </h2>
+<a href='/fashion'class="specialbutton">Upload To Wardrobe</a> <a href='/select' class="specialbutton">Outfit Recommender</a> 
+<br><br>
+<h3 class="font1"></h3>
+<form action="/fashionpredict" method="POST" enctype="multipart/form-data">
+    <input type="file" id='img' name='img' onchange="loadFile(event)" >
+    <p><img id="output" width="200" src="{{url_for('static', filename='test.jpg')}}" alt="" /></p>
+    <br>
+    <br>
+    <input type="submit" value="Predict Type And Color Of Outfit">
+</form>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+<!---- <label for="occasion"> <h3 style="display:inline">The Outfit is for: </h3></label>
+          <select name="occasion" id="occasion">
+            <option value="party">Party</option>
+            <option value="office">Office</option>
+            <option value="sports">Sports</option>
+            <option value="function">Function</option>
+          </select>
+        <br> <br>  --->  
+<label for="type"> <h3 class ="font1" style="display:inline;color:purple;">Type of the Outfit is: </h3></label>
+<select class="formstyle" name="type" id="type">
+    {% if pred == "shirt" %}
+        <option value="shirt" selected="selected">Shirt</option>
+        <option value="t-shirt">T-Shirt</option>
+        <option value="pants">Pants</option>
+        <option value="shoes">Shoes</option>
+    {% elif pred == "t-shirt" %}
+        <option value="shirt">Shirt</option>
+        <option value="t-shirt" selected="selected">T-Shirt</option>
+        <option value="pants">Pants</option>
+        <option value="shoes">Shoes</option>
+    {% elif pred == "pants" %}
+        <option value="shirt">Shirt</option>
+        <option value="t-shirt">T-Shirt</option>
+        <option value="pants" selected="selected">Pants</option>
+        <option value="shoes">Shoes</option>
+    {% elif pred == "shoes" %}
+        <option value="shirt">Shirt</option>
+        <option value="t-shirt">T-Shirt</option>
+        <option value="pants">Pants</option>
+        <option value="shoes" selected="selected">Shoes</option>   
+    {% else %}
+        <option value="shirt">Shirt</option>
+        <option value="t-shirt">T-Shirt</option>
+        <option value="pants">Pants</option>
+        <option value="shoes">Shoes</option> 
+    {% endif %}
+</select>
+<br><br>
+<label for="color"> <h3 class ="font1" style="display:inline;color:purple;">Color Of Outfit is: </h3></label>
+<select class="formstyle" name="color" id="color">
+    {% if pred2 == "black" %}
+        <option value="black" selected="selected">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "blue" %}
+        <option value="black">Black</option>
+        <option value="blue" selected="selected">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "brown" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown" selected="selected">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "green" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green" selected="selected">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "grey" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey" selected="selected">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "khaki" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki" selected="selected">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "marron" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron" selected="selected">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "orange" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange" selected="selected">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>
+    {% elif pred2 == "pink" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink" selected="selected">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option> 
+    {% elif pred2 == "red" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red" selected="selected">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option>     
+    {% elif pred2 == "white" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white" selected="selected">White</option>
+        <option value="yellow">Yellow</option>  
+    {% elif pred2 == "yellow" %}
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow"selected="selected">Yellow</option>
+    {% else %} 
+        <option value="black">Black</option>
+        <option value="blue">Blue</option>
+        <option value="brown">Brown</option>
+        <option value="green">Green</option>
+        <option value="grey">Grey</option>
+        <option value="khaki">Khaki</option>
+        <option value="marron">Maroon</option>
+        <option value="orange">Orange</option>
+        <option value="pink">Pink</option>
+        <option value="red">Red</option>
+        <option value="white">White</option>
+        <option value="yellow">Yellow</option> 
+    {% endif %}
+</select>
+    <br><br>
+    <input class="specialbutton" type="submit" value="Upload">
+</form>
+<h3 style="color: red;">{{pred3}}</h3>
+<h3>{{pred4}}</h3>
+<h3>{{pred5}}</h3>
+</center>
+{% endblock %}
+</html>
