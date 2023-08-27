@@ -14,3 +14,16 @@ In addition to the recommendation model, a web application has been developed th
   - Users can add and store outfits by providing clothing items and occasion tags.
   - Recommendation feature suggests outfits for a given occasion.
   - Next best outfit recommendation based on user preferences.
+
+## Multi-input CNN Architecture 
+![CNN Architecture](https://github.com/rohith1002/fashion-recommendation-System/blob/main/images/download.png)
+## Login Interface
+![login](https://github.com/rohith1002/fashion-recommendation-System/blob/main/images/Capture.PNG)
+## Home Page
+![home](https://github.com/rohith1002/fashion-recommendation-System/blob/main/images/Capture1.PNG)
+## Uploading the clothes
+![upload](https://github.com/rohith1002/fashion-recommendation-System/blob/main/images/upload.PNG)
+## Selecting the occassion
+![occassion](https://github.com/rohith1002/fashion-recommendation-System/blob/main/images/occassions.PNG)
+## Outfit Reccomendation
+![Recommendation](https://github.com/rohith1002/fashion-recommendation-System/blob/main/images/outfit_reccomendation.PNG)
